@@ -102,8 +102,8 @@ export default function Home({users}: {users: Users}) {
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const keyword = context.query && context.query.q as string
-  const page = context.query && context.query.page as unknown as number || 1
+  const keyword = context.query && context.query.q as string;
+  const page = context.query && context.query.page as unknown as number || 1;
 
   if(keyword) {
       const octokit = new Octokit({
