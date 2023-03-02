@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arsenal&display=swap');
+:root {
+   --font-jost: 'Jost';
+   --font-arsenal: 'Arsenal';
+   color-scheme: light dark;
+}
+
+:root.dark {
+  --background: #000000;
+  --text-color: #ffffff;
+}
+:root.light {
+  --background: #ffffff;
+  --text-color: #000000;
+}
+
+@media (prefers-color-scheme: dark) {
+  --background: #000000;
+  --text-color: #ffffff;
+}
+@media (prefers-color-scheme: light) {
+  --background: #ffffff;
+  --text-color: #000000;
+
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Jost"
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--text-color);
+  background: var(--background);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+@media (prefers-color-scheme: light) {
+  html {
+    color-scheme: light;
+  }
+}

@@ -1,0 +1,21 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 38px;
+    margin: 16px;
+}
+
+.header svg {
+    font-size: 36px;
+    cursor: pointer;
+}
+
+.header .title {
+    font-family: 'Arsenal';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 36px;
+}
+

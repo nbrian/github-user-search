@@ -1,0 +1,38 @@
+.user {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arsenal';
+    margin-bottom: 20px;
+}
+
+.user > * {
+    font-family: 'Arsenal';
+    font-style: normal;
+}
+
+.user img {
+    border-radius: 50%;
+}
+
+.user .name {
+    font-size: 26px;
+    line-height: 36px;
+}
+.user .username {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+}
+.user .location {
+    font-family: 'Jost';
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.user .location svg {
+    font-size: 16px;
+}

@@ -1,0 +1,58 @@
+.container {
+    /* display: flex;
+    justify-content: center; */
+}
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+    margin-bottom: 60px;
+}
+
+.list .card {
+    display: flex;
+    width: 209px;
+    height: 80px;
+    padding: 8px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    cursor: pointer;
+}
+
+.list .card img {
+    display: flex;
+    align-items: center;
+}
+.list .card .details {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.card .details .name{
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.user {
+    position: relative
+}
+.user .action {
+    position: absolute;
+    right: 4px;
+    top: 14px;
+    color: #F44336;
+    
+}
+.user .action svg {
+    font-size:16px;
+}
