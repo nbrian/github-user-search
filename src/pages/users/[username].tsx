@@ -20,7 +20,7 @@ export default function User({user, list}: {user: UserDetails, list: Array<Repo 
     const favorites = useAppSelector(selectFavorites);
     const dispatch = useAppDispatch();
     const [tab, setTab] = useState('repos');
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(router.query && Number(router.query.page));
     
     useEffect(() => {
         const url: UrlObject = {
@@ -36,7 +36,7 @@ export default function User({user, list}: {user: UserDetails, list: Array<Repo 
     const handleTabChange = (e: SyntheticEvent, value: string) => {
         e.preventDefault();
         setTab(value);
-        setPage(1);
+        setPage(1); //reset to page 1
 
         router.push({
             pathname: `/users/${user.login}`,
@@ -48,19 +48,6 @@ export default function User({user, list}: {user: UserDetails, list: Array<Repo 
     const handlePageChange = (_event: ChangeEvent<unknown>, value: number) => {
         setPage(value);
     };
-  
-    // add delay implementation ?
-    // use shallow?
-    const pageQuery = (tab: string, pageNumber: number) => {
-        const url: UrlObject = {
-            pathname: `/users/${user.login}`,
-            query: {
-                tab,
-                page: pageNumber
-            }
-        };
-        Router.push(url);
-    }
 
     const handleUserFavorite = (user: UserDetails) => {
         // remove if existing
@@ -131,11 +118,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
     let list = await octokit.request(`GET /users/${username}/${tab}`, {username});
 
-    
-    // const repos = await octokit.request(`GET /users/${username}/repos`, {username});
-    // const followers = await octokit.request(`GET /users/${username}/followers`, {username});
-    // const following = await octokit.request(`GET /users/${username}/following`, {username});
-    console.log('tab', tab);
     if(tab) {
         list = await octokit.request(`GET /users/${username}/${tab}`, {per_page: 10, page});
     } else {

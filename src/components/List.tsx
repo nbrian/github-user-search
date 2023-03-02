@@ -10,7 +10,7 @@ export default function List({keyword, list, page, pageCount, handlePageChange, 
     const highlightKeyword = ((value: string) => {
         if(keyword) {
             const splitstr = 
-                value.slice(0, value.indexOf(keyword)) + `<b>${keyword}</b>` + 
+                value.slice(0, value.indexOf(keyword)) + `<b>${value.slice(value.indexOf(keyword), keyword.length)}</b>` + 
                 value.slice(value.indexOf(keyword) + keyword.length, value.length);
             return { __html: splitstr };
         }
