@@ -10,23 +10,23 @@ import { Octokit } from "octokit";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { UrlObject } from "url";
 
-export default function Home({users}: {users: Users}) {
+export default function Home({users, search}: {users: Users, search: string}) {
   const router = useRouter();
+  
   const favorites = useAppSelector(selectFavorites);
   const dispatch = useAppDispatch();
+  
   const searchInput = useRef<HTMLInputElement | null>(null);
-  const [keyword, setKeyword] = useState<string | null>(null);
-  const [page, setPage] = useState(1);
+  
+  const [keyword, setKeyword] = useState<string | null>(search);
+  const [page, setPage] = useState(router.query && Number(router.query.page));
 
   useEffect(() => {
-    // set keyword/page if theres url query
-    if(Router.query && (Router.query.q ||  Router.query.page)) {
-      const queries = Router.query;
-      setKeyword(String(queries.q));
-      setPage(Number(queries.page));
+    if(Object.keys(router.query).length > 0) {
+      setPage(Number(router.query.page))
     }
-  }, []);
-  
+  }, [router.query]);
+
   useEffect(() => {
     pageQuery(keyword, page);
   }, [keyword, page]);
@@ -36,7 +36,7 @@ export default function Home({users}: {users: Users}) {
   const pageCount = users && users.total_count < 1000 ? Math.floor(users.total_count/10) : 100; 
   
   const handlePageChange = (_event: ChangeEvent<unknown>, value: number) => {
-      setPage(value);
+    setPage(value);
   };
 
   const handleClearSearch = () => {
@@ -57,14 +57,13 @@ export default function Home({users}: {users: Users}) {
     }
   }
 
-  // add delay implementation ?
-  // use shallow?
+  // NOTE: add delay implementation?
   const pageQuery = (q: string | null, pageNumber: number) => {
     let url: UrlObject = {pathname: '/'}
     if(q) {
       url = { ...url, query: {q, page: pageNumber} }
     }
-    Router.push(url)
+    Router.push(url);
   }
 
   return (
@@ -78,7 +77,7 @@ export default function Home({users}: {users: Users}) {
 
       {users ?
         <UserList 
-          keyword={keyword} 
+          keyword={search} 
           list={users} 
           page={page} 
           pageCount={pageCount} 
@@ -123,14 +122,17 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
         // console.log(users.data);
         return {
-            props: {users: users.data},
+            props: {
+              users: users.data,
+              search: keyword
+            },
         }
       }
   
   }
 
   return {
-      props: {users: null}
+      props: {users: null, search: null}
   }
 
 }
