@@ -1,0 +1,25 @@
+/* .container {
+
+} */
+.container .totalCount {
+    margin: 16px 0;
+    font-size: 14px;
+}
+
+.container .notFound {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container .notFound .searchIcon {
+    font-size: 36px;
+    opacity: .5;
+    margin-bottom: 7px;
+}
+.container .notFound span {
+    font-size: 14px;
+}
+.container .notFound .keyword {
+    font-weight: bold;
+}

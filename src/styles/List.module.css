@@ -1,7 +1,3 @@
-.container {
-    /* display: flex;
-    justify-content: center; */
-}
 .list {
     display: flex;
     flex-wrap: wrap;
@@ -15,8 +11,10 @@
     width: 209px;
     height: 80px;
     padding: 8px;
+    border: 1px solid;
+    border-color: var(--card-border);
     border-radius: 10px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--card-box-shadow);
     align-items: center;
     cursor: pointer;
 }
@@ -36,6 +34,10 @@
 .card .details .name{
     font-size: 16px;
     line-height: 24px;
+    white-space: nowrap;
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .pagination {
@@ -55,4 +57,21 @@
 }
 .user .action svg {
     font-size:16px;
+}
+
+.pagination {
+    margin-bottom: 50px;
+}
+
+.pagination .MuiPagination-ul .Mui-selected {
+    background-color: #1976D2;
+}
+.pagination ul li:first-child button, .pagination ul li:last-child button{
+    margin: 0 14px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12);
+    border-radius: 34px;
+}
+
+.pagination ul li button{
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12);
 }

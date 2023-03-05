@@ -18,6 +18,7 @@ export default function Header() {
             document.documentElement.className = theme;
         } else {
             dispatch(toggleTheme(theme));
+            document.documentElement.className = theme === 'dark' ? 'light' : 'dark';
         }
 
         // add system theme event trigger
