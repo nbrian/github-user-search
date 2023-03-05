@@ -2,9 +2,11 @@ import UserList from "@/components/UserList";
 import { User, Users } from "@/lib/types/github";
 import { addFavorite, removeFavorite, selectFavorites } from "@/store/favoriteSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { Close, GitHub } from "@mui/icons-material";
+import styles from "@/styles/Home.module.css";
+import { Cancel } from "@mui/icons-material";
 import { Input } from "@mui/joy";
 import { GetServerSidePropsContext } from "next";
+import Image from "next/image";
 import Router, { useRouter } from "next/router";
 import { Octokit } from "octokit";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
@@ -19,7 +21,7 @@ export default function Home({users, search}: {users: Users, search: string}) {
   const searchInput = useRef<HTMLInputElement | null>(null);
   
   const [keyword, setKeyword] = useState<string | null>(search);
-  const [page, setPage] = useState(router.query && Number(router.query.page));
+  const [page, setPage] = useState(router.query && Number(router.query.page) ? Number(router.query.page) : 1);
 
   useEffect(() => {
     if(Object.keys(router.query).length > 0) {
@@ -67,13 +69,14 @@ export default function Home({users, search}: {users: Users, search: string}) {
   }
 
   return (
-    <>
+    <div className={styles.container}>
       <Input
+        className={styles.searchBar}
         ref={searchInput}
         placeholder="Enter GitHub username, i.e. gaearon" variant="outlined" 
         onChange={e => setKeyword(e.target.value)}
         value={keyword || ''}
-        endDecorator={keyword ? <Close onClick={handleClearSearch} /> : <></>}/>
+        endDecorator={keyword ? <Cancel className={styles.clearSearch} onClick={handleClearSearch} /> : <></>}/>
 
       {users ?
         <UserList 
@@ -87,22 +90,24 @@ export default function Home({users, search}: {users: Users, search: string}) {
           handleUserFavorite={handleUserFavorite}
         /> 
         : 
-        <div>
-          <GitHub />
-          <p>
-          Enter GitHub username and search users matching the input like Google Search, click avatars to view more details, including repositories, followers and following.
+        <div className={styles.noSearch}>
+          {/* <GitHub /> */}
+          <Image src='/GitHub_Logo.svg' alt="Logo" width={120} height={120} className={styles.image}/>
+          <Image src='/GitHub_Text.svg' alt="Logo" width={139} height={57} className={styles.image}/>
+          <p className={styles.text}>
+            Enter GitHub username and search users matching the input like Google Search, click avatars to view more details, including repositories, followers and following.
           </p>
         </div>
       }
       
       
-    </>
+    </div>
   )
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const keyword = context.query && context.query.q as string;
-  const page = context.query && context.query.page as unknown as number || 1;
+export async function getServerSideProps({query, res}: GetServerSidePropsContext) {
+  const keyword = query && query.q as string;
+  const page = query && query.page as unknown as number || 1;
 
   if(keyword) {
       const octokit = new Octokit({
@@ -120,7 +125,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
           return user;
         }));
 
-        // console.log(users.data);
+        res.setHeader(
+          'Cache-Control',
+          'public, s-maxage=10, stale-while-revalidate=59'
+        );
         return {
             props: {
               users: users.data,

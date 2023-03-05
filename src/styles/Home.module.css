@@ -1,0 +1,28 @@
+.container {
+    margin: 0 16px;
+}
+.container .searchBar {
+    border: 1px solid;
+    border-color: var(--search-border);
+    border-radius: 4px;
+    color: var(--search-color);
+}
+.container .clearSearch {
+    font-size: 20px;
+    color: var(--text-color);
+    opacity: .3;
+}
+.noSearch {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.noSearch .image {
+    filter: var(--image-filter);
+}
+
+.noSearch .text {
+    opacity: .5;
+}

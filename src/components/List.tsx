@@ -69,7 +69,12 @@ export default function List({keyword, list, page, pageCount, handlePageChange, 
                 ))}
             </div>
             {pageCount > 0 && 
-                <Pagination className={styles.pagination} page={page} count={pageCount} shape="rounded" onChange={handlePageChange}/>
+                <Pagination 
+                    color="primary" 
+                    className={styles.pagination} 
+                    shape="rounded" 
+                    page={page} count={pageCount} 
+                    onChange={handlePageChange}/>
             }
         </div>
     )
