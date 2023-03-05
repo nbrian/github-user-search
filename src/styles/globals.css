@@ -12,9 +12,11 @@
   --text-color: #ffffff;
   --image-filter:invert(100%);
   --card-border: rgba(255, 255, 255, 0.42);
-  --search-border: rgba(255, 255, 255, 0.42);
+  --search-border: rgba(255, 255, 255, 0.58);
   --search-color: rgba(255, 255, 255, 0.87);
   --card-box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.1);
+  --pagination-box-shadow: none;
+  --pagination-border: 1px solid rgba(255, 255, 255, 0.42);
 }
 :root.light {
   --background: #ffffff;
@@ -24,6 +26,8 @@
   --search-border: rgba(0, 0, 0, 0.42);
   --search-color: rgba(0, 0, 0, 0.87);
   --card-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  --pagination-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12);
+  --pagination-border: none;
 }
 
 /* @media (prefers-color-scheme: dark) {

@@ -3,6 +3,7 @@ import { getPageCount } from "@/lib/helper";
 import { User } from "@/lib/types/github";
 import { addFavorite, removeFavorite, selectFavorites } from "@/store/favoriteSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import styles from "@/styles/Liked.module.css";
 import { People } from "@mui/icons-material";
 import { useRouter } from "next/router";
 import { ChangeEvent } from "react";
@@ -43,10 +44,11 @@ export default function Liked() {
                     handlePageChange={handlePageChange} 
                     handleItemClick={handleUserClick} 
                     handleUserFavorite={handleUserFavorite}
-                /> : <>
-                    <People />
+                /> : 
+                <div className={styles.noLikes}>
+                    <People className={styles.icon}/>
                     <span>Once you like people, you&apos;ll see them here.</span>
-                </>
+                </div>
             }
         </>
     )
