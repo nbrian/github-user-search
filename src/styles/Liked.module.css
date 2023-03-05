@@ -1,0 +1,16 @@
+.noLikes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.noLikes .icon {
+    font-size: 36px;
+    opacity: .5;
+    margin-bottom: 7px;
+}
+
+.noLikes span {
+    font-size: 14px;
+}
